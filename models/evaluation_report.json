@@ -1,0 +1,498 @@
+{
+    "evaluation_schema_version": 1,
+    "evaluated_at": "2026-08-23T13:18:36.457601+00:00",
+    "evaluation_role": "Reproduction and diagnostic evaluation of the saved final test split.",
+    "independent_new_test_set": false,
+    "model_name": "RandomForestRegressor",
+    "model_display_name": "Random Forest",
+    "candidate_key": "random_forest",
+    "feature_set": "base",
+    "feature_columns": [
+        "delta_days",
+        "history_seen",
+        "history_accuracy"
+    ],
+    "target_column": "p_recall",
+    "target_scale": "0-1",
+    "training_source": "Duolingo Spaced Repetition public learning traces dataset",
+    "model_role": "Public bootstrap retention prediction model",
+    "memorymap_personal_model": false,
+    "test_rows": 100000,
+    "reconstruction": {
+        "sample_row_match": true,
+        "usable_row_match": true,
+        "test_row_match": true,
+        "expected_sampled_rows": 1000000,
+        "actual_sampled_rows": 1000000,
+        "matches_training_structure": true
+    },
+    "metrics": {
+        "model": "Random Forest",
+        "observations": 100000,
+        "mae": 0.17026705915302126,
+        "mae_pp": 17.026705915302127,
+        "rmse": 0.26986087475156234,
+        "rmse_pp": 26.986087475156236,
+        "r2": 0.019229334334722625,
+        "bias": 0.0010843485453246708,
+        "bias_pp": 0.10843485453246708,
+        "bias_direction": "Balanced",
+        "within_5pp": 0.04273,
+        "within_10pp": 0.50777,
+        "within_15pp": 0.79394
+    },
+    "prediction_clipping": {
+        "clipped_count": 0,
+        "clipped_fraction": 0.0
+    },
+    "residual_analysis": {
+        "mean_signed_error": 0.0010843485453246706,
+        "median_signed_error": -0.08938830635633066,
+        "mean_absolute_error": 0.17026705915302126,
+        "median_absolute_error": 0.0992245847205972,
+        "maximum_absolute_error": 0.9843392079528216,
+        "error_25th_percentile": 0.07957903973545857,
+        "error_50th_percentile": 0.0992245847205972,
+        "error_75th_percentile": 0.13615136338207415,
+        "error_90th_percentile": 0.3788398072477045,
+        "error_95th_percentile": 0.870526678022864
+    },
+    "prediction_distribution": {
+        "actual_mean": 0.8948528242474,
+        "actual_std": 0.27249352678731803,
+        "actual_min": 0.0,
+        "actual_max": 1.0,
+        "predicted_mean": 0.8959371727927248,
+        "predicted_std": 0.05049697607845573,
+        "predicted_min": 0.07008730222142857,
+        "predicted_max": 1.0,
+        "actual_prediction_correlation": 0.14458292757043126,
+        "correlation_note": "Correlation describes association between actual and predicted recall. It is not itself a measure of prediction accuracy."
+    },
+    "calibration_bins": [
+        {
+            "bin": "(-0.001, 0.1]",
+            "observations": 3,
+            "average_prediction": 0.07902248144005523,
+            "average_actual": 0.3333333333333333,
+            "calibration_error": 0.25431085189327807
+        },
+        {
+            "bin": "(0.1, 0.2]",
+            "observations": 10,
+            "average_prediction": 0.1597711614579904,
+            "average_actual": 0.533333334,
+            "calibration_error": 0.37356217254200963
+        },
+        {
+            "bin": "(0.2, 0.3]",
+            "observations": 35,
+            "average_prediction": 0.25654811984209175,
+            "average_actual": 0.38571428571428573,
+            "calibration_error": 0.12916616587219398
+        },
+        {
+            "bin": "(0.3, 0.4]",
+            "observations": 85,
+            "average_prediction": 0.352606903674277,
+            "average_actual": 0.55,
+            "calibration_error": 0.19739309632572305
+        },
+        {
+            "bin": "(0.4, 0.5]",
+            "observations": 136,
+            "average_prediction": 0.45107840264459587,
+            "average_actual": 0.5090686288235294,
+            "calibration_error": 0.05799022617893357
+        },
+        {
+            "bin": "(0.5, 0.6]",
+            "observations": 225,
+            "average_prediction": 0.5523335790108022,
+            "average_actual": 0.6520740750222221,
+            "calibration_error": 0.09974049601141999
+        },
+        {
+            "bin": "(0.6, 0.7]",
+            "observations": 466,
+            "average_prediction": 0.6587289025232487,
+            "average_actual": 0.7166762155793992,
+            "calibration_error": 0.05794731305615053
+        },
+        {
+            "bin": "(0.7, 0.8]",
+            "observations": 1725,
+            "average_prediction": 0.7654014769057034,
+            "average_actual": 0.7912831016057972,
+            "calibration_error": 0.025881624700093808
+        },
+        {
+            "bin": "(0.8, 0.9]",
+            "observations": 40387,
+            "average_prediction": 0.8724168375734617,
+            "average_actual": 0.8753626500252556,
+            "calibration_error": 0.0029458124517939277
+        },
+        {
+            "bin": "(0.9, 1.0]",
+            "observations": 56928,
+            "average_prediction": 0.9223181207112865,
+            "average_actual": 0.9160789642653879,
+            "calibration_error": 0.006239156445898564
+        }
+    ],
+    "calibration_summary": {
+        "expected_calibration_error": 0.006019305417717604,
+        "expected_calibration_error_pp": 0.6019305417717604,
+        "maximum_calibration_error": 0.37356217254200963,
+        "maximum_calibration_error_pp": 37.35621725420096,
+        "calibration_bins": 10
+    },
+    "delay_group_metrics": [
+        {
+            "delay_group": "Up to 1 day",
+            "minimum_days_exclusive": null,
+            "maximum_days_inclusive": 1,
+            "observations": 51121,
+            "mae": 0.1552766372150503,
+            "mae_pp": 15.52766372150503,
+            "rmse": 0.25722744628429944,
+            "rmse_pp": 25.722744628429943,
+            "bias": 0.001461274666863471,
+            "bias_pp": 0.1461274666863471
+        },
+        {
+            "delay_group": "1 to 3 days",
+            "minimum_days_exclusive": 1,
+            "maximum_days_inclusive": 3,
+            "observations": 12987,
+            "mae": 0.17597207106930163,
+            "mae_pp": 17.597207106930163,
+            "rmse": 0.27303593693078176,
+            "rmse_pp": 27.303593693078177,
+            "bias": -0.00037157432714646384,
+            "bias_pp": -0.03715743271464638
+        },
+        {
+            "delay_group": "3 to 7 days",
+            "minimum_days_exclusive": 3,
+            "maximum_days_inclusive": 7,
+            "observations": 13478,
+            "mae": 0.17603142083384568,
+            "mae_pp": 17.60314208338457,
+            "rmse": 0.26801031735113223,
+            "rmse_pp": 26.801031735113224,
+            "bias": -0.003977434368737323,
+            "bias_pp": -0.3977434368737323
+        },
+        {
+            "delay_group": "7 to 30 days",
+            "minimum_days_exclusive": 7,
+            "maximum_days_inclusive": 30,
+            "observations": 14500,
+            "mae": 0.19163664813345976,
+            "mae_pp": 19.163664813345978,
+            "rmse": 0.2902805666978196,
+            "rmse_pp": 29.02805666978196,
+            "bias": 0.004620347632852571,
+            "bias_pp": 0.4620347632852571
+        },
+        {
+            "delay_group": "More than 30 days",
+            "minimum_days_exclusive": 30,
+            "maximum_days_inclusive": null,
+            "observations": 7914,
+            "mae": 0.20876633425837535,
+            "mae_pp": 20.876633425837536,
+            "rmse": 0.306184070932717,
+            "rmse_pp": 30.6184070932717,
+            "bias": 0.00318062772553324,
+            "bias_pp": 0.318062772553324
+        }
+    ],
+    "reproducibility": {
+        "available": true,
+        "matches": true,
+        "tolerance": 1e-09,
+        "differences": {
+            "mae": 0.0,
+            "rmse": 0.0,
+            "r2": 0.0,
+            "bias": 6.5052130349130266e-18,
+            "within_5pp": 0.0,
+            "within_10pp": 0.0,
+            "within_15pp": 0.0
+        },
+        "message": "Reloaded model metrics match the metrics recorded during training."
+    },
+    "sanity_checks": [
+        {
+            "check": "Model class",
+            "passed": true,
+            "details": "Expected RandomForestRegressor, loaded RandomForestRegressor."
+        },
+        {
+            "check": "Feature order",
+            "passed": true,
+            "details": "3 expected feature(s)."
+        },
+        {
+            "check": "Model feature count",
+            "passed": true,
+            "details": "Saved model feature count should match metadata."
+        },
+        {
+            "check": "Scaler availability",
+            "passed": true,
+            "details": "uses_scaler=False"
+        },
+        {
+            "check": "Target range",
+            "passed": true,
+            "details": "All final test target values must remain between 0 and 1."
+        },
+        {
+            "check": "Prediction range",
+            "passed": true,
+            "details": "All final predictions must remain between 0 and 1."
+        },
+        {
+            "check": "Finite predictions",
+            "passed": true,
+            "details": "Predictions must not contain NaN or infinity."
+        },
+        {
+            "check": "Non-empty test set",
+            "passed": true,
+            "details": "100,000 test observations."
+        },
+        {
+            "check": "Reconstructed test size",
+            "passed": true,
+            "details": "Expected 100000, reconstructed 100000."
+        },
+        {
+            "check": "Sample reconstruction",
+            "passed": true,
+            "details": "Reconstructed sample row count should match training metadata."
+        },
+        {
+            "check": "Usable-row reconstruction",
+            "passed": true,
+            "details": "Usable engineered rows should match training metadata."
+        }
+    ],
+    "sanity_checks_passed": 11,
+    "sanity_checks_total": 11,
+    "all_sanity_checks_passed": true,
+    "evaluation_reproduced": true,
+    "worst_prediction_errors": [
+        {
+            "error_rank": 1,
+            "test_row": 96612,
+            "actual": 0.0,
+            "predicted": 0.9843392079528216,
+            "signed_error": 0.9843392079528216,
+            "absolute_error": 0.9843392079528216,
+            "absolute_error_pp": 98.43392079528216,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 2,
+            "test_row": 58990,
+            "actual": 0.0,
+            "predicted": 0.9785594744242,
+            "signed_error": 0.9785594744242,
+            "absolute_error": 0.9785594744242,
+            "absolute_error_pp": 97.85594744242,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 3,
+            "test_row": 83260,
+            "actual": 0.0,
+            "predicted": 0.9769503972119048,
+            "signed_error": 0.9769503972119048,
+            "absolute_error": 0.9769503972119048,
+            "absolute_error_pp": 97.69503972119048,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 4,
+            "test_row": 80025,
+            "actual": 0.0,
+            "predicted": 0.9743664326625558,
+            "signed_error": 0.9743664326625558,
+            "absolute_error": 0.9743664326625558,
+            "absolute_error_pp": 97.43664326625559,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 5,
+            "test_row": 34338,
+            "actual": 0.0,
+            "predicted": 0.9738168793275102,
+            "signed_error": 0.9738168793275102,
+            "absolute_error": 0.9738168793275102,
+            "absolute_error_pp": 97.38168793275102,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 6,
+            "test_row": 69176,
+            "actual": 0.0,
+            "predicted": 0.9721994790459056,
+            "signed_error": 0.9721994790459056,
+            "absolute_error": 0.9721994790459056,
+            "absolute_error_pp": 97.21994790459057,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 7,
+            "test_row": 35400,
+            "actual": 0.0,
+            "predicted": 0.972170810022002,
+            "signed_error": 0.972170810022002,
+            "absolute_error": 0.972170810022002,
+            "absolute_error_pp": 97.2170810022002,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 8,
+            "test_row": 3636,
+            "actual": 0.0,
+            "predicted": 0.9708747795518675,
+            "signed_error": 0.9708747795518675,
+            "absolute_error": 0.9708747795518675,
+            "absolute_error_pp": 97.08747795518676,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 9,
+            "test_row": 4518,
+            "actual": 0.0,
+            "predicted": 0.9676178660287884,
+            "signed_error": 0.9676178660287884,
+            "absolute_error": 0.9676178660287884,
+            "absolute_error_pp": 96.76178660287884,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 10,
+            "test_row": 53349,
+            "actual": 0.0,
+            "predicted": 0.9676000969414673,
+            "signed_error": 0.9676000969414673,
+            "absolute_error": 0.9676000969414673,
+            "absolute_error_pp": 96.76000969414673,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 11,
+            "test_row": 36900,
+            "actual": 0.0,
+            "predicted": 0.9661656596509205,
+            "signed_error": 0.9661656596509205,
+            "absolute_error": 0.9661656596509205,
+            "absolute_error_pp": 96.61656596509205,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 12,
+            "test_row": 86213,
+            "actual": 0.0,
+            "predicted": 0.966106847466904,
+            "signed_error": 0.966106847466904,
+            "absolute_error": 0.966106847466904,
+            "absolute_error_pp": 96.6106847466904,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 13,
+            "test_row": 85297,
+            "actual": 0.0,
+            "predicted": 0.965019036532687,
+            "signed_error": 0.965019036532687,
+            "absolute_error": 0.965019036532687,
+            "absolute_error_pp": 96.5019036532687,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 14,
+            "test_row": 70905,
+            "actual": 0.0,
+            "predicted": 0.964085912387026,
+            "signed_error": 0.964085912387026,
+            "absolute_error": 0.964085912387026,
+            "absolute_error_pp": 96.4085912387026,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 15,
+            "test_row": 56892,
+            "actual": 0.0,
+            "predicted": 0.9638799939576108,
+            "signed_error": 0.9638799939576108,
+            "absolute_error": 0.9638799939576108,
+            "absolute_error_pp": 96.38799939576108,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 16,
+            "test_row": 74354,
+            "actual": 0.0,
+            "predicted": 0.9638190133849627,
+            "signed_error": 0.9638190133849627,
+            "absolute_error": 0.9638190133849627,
+            "absolute_error_pp": 96.38190133849626,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 17,
+            "test_row": 25434,
+            "actual": 0.0,
+            "predicted": 0.9628056053102931,
+            "signed_error": 0.9628056053102931,
+            "absolute_error": 0.9628056053102931,
+            "absolute_error_pp": 96.28056053102931,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 18,
+            "test_row": 33710,
+            "actual": 0.0,
+            "predicted": 0.96246968233103,
+            "signed_error": 0.96246968233103,
+            "absolute_error": 0.96246968233103,
+            "absolute_error_pp": 96.246968233103,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 19,
+            "test_row": 36706,
+            "actual": 0.0,
+            "predicted": 0.9623148148555556,
+            "signed_error": 0.9623148148555556,
+            "absolute_error": 0.9623148148555556,
+            "absolute_error_pp": 96.23148148555556,
+            "bias_direction": "Overprediction"
+        },
+        {
+            "error_rank": 20,
+            "test_row": 46138,
+            "actual": 0.0,
+            "predicted": 0.9622087452478919,
+            "signed_error": 0.9622087452478919,
+            "absolute_error": 0.9622087452478919,
+            "absolute_error_pp": 96.2208745247892,
+            "bias_direction": "Overprediction"
+        }
+    ],
+    "methodological_note": "This evaluation reconstructs the saved model's original sampled final test split. It does not constitute a second independent external test set.",
+    "research_limitations": [
+        "The chronological split is applied after uniform sampling, so it is not identical to the full-dataset chronological split used in the original Duolingo study.",
+        "The current processed training frame does not preserve user and lexeme identifiers for grouped split analysis, so user or lexeme overlap across sampled splits cannot be excluded.",
+        "The public Duolingo model does not learn MemoryMap-specific features such as study duration, topic difficulty, confidence, or previous MemoryMap quiz performance.",
+        "This model bootstraps retention prediction. It must not be presented as a personalized MemoryMap model trained on the project's future longitudinal student dataset."
+    ]
+}

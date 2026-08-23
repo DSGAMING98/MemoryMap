@@ -1,0 +1,103 @@
+# ============================================================
+# MemoryMap
+# Git Ignore Configuration
+# ============================================================
+
+
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+
+# PyCharm / JetBrains
+.idea/
+*.iml
+
+
+# VS Code
+.vscode/
+
+
+# ============================================================
+# MemoryMap large datasets
+# ============================================================
+
+# Raw Duolingo dataset
+data/raw/
+
+# Processed training dataset
+data/processed/
+
+
+# ============================================================
+# Local database
+# ============================================================
+
+# Local SQLite database should not be committed
+memorymap.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+
+# ============================================================
+# Machine Learning
+# ============================================================
+
+# IMPORTANT:
+# retention_model.pkl is NOT ignored.
+# It will be stored using Git LFS.
+
+# Temporary ML files
+models/*.tmp
+models/*.temp
+
+
+# ============================================================
+# Streamlit
+# ============================================================
+
+.streamlit/secrets.toml
+
+
+# ============================================================
+# Testing / coverage
+# ============================================================
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+
+# ============================================================
+# Jupyter
+# ============================================================
+
+.ipynb_checkpoints/
+
+
+# ============================================================
+# OS generated files
+# ============================================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# ============================================================
+# Logs / temporary files
+# ============================================================
+
+*.log
+*.tmp
+*.temp
+~*
