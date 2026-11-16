@@ -5,7 +5,7 @@ from pathlib import Path
 
 APP_NAME = "MemoryMap"
 
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 
 APP_TITLE = (
     "MemoryMap - Personalized Memory Retention "
