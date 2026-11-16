@@ -2,13 +2,13 @@
 
 ### Personalized memory-retention prediction and adaptive revision in Streamlit
 
-[![Live app](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?logo=streamlit&logoColor=white)](https://memorymap.streamlit.app/)
+[![Deployment](https://img.shields.io/badge/Vercel-Production-000000?logo=vercel&logoColor=white)](#vercel-production-deployment)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Model](https://img.shields.io/badge/Model-Random%20Forest-7C5CFF)](#model-training)
 
-**MemoryMap** is a Streamlit-only educational research application that predicts recall, recommends revision times, records delayed-recall quiz results, and compares predictions with real outcomes.
+**MemoryMap** is an educational research application that predicts recall, recommends revision times, records delayed-recall quiz results, and compares predictions with real outcomes. The repository preserves the original Streamlit research interface and now includes a Vercel-native production client with a Python prediction API.
 
-🌐 **Live application:** [memorymap.streamlit.app](https://memorymap.streamlit.app/)
+🌐 **Live application:** the production Vercel URL is listed in the deployment section below.
 
 > **Research question:** Can learning-history data predict memory retention and recommend a better revision interval than a fixed forgetting-curve schedule?
 
@@ -261,12 +261,15 @@ students ──< topics ──< study_sessions ──< predictions
 
 Foreign keys, range checks, migrations, transaction handling, and indexes protect data quality. The local `memorymap.db` is ignored by Git.
 
-> Streamlit Community Cloud has ephemeral local storage. Data created in the public demo can be reset when the app restarts or redeploys. For durable multi-user production storage, replace SQLite with a hosted database while keeping the Streamlit interface.
+> The Vercel production client stores learner records in browser `localStorage`, while the Streamlit research client uses SQLite. Neither is a shared multi-user research database. Use a hosted database before collecting durable cross-device research data.
 
 ## Project structure
 
 ```text
 MemoryMap/
+├── public/                        # Vercel frontend: HTML, CSS, and JavaScript
+├── api/                           # Vercel FastAPI prediction function
+├── vercel.json                   # Function bundle and HTTP configuration
 ├── app.py                         # Streamlit entry point
 ├── pages/                         # Seven Streamlit pages
 ├── core/                          # Curves, prediction, scheduling, quiz, metrics
@@ -277,8 +280,8 @@ MemoryMap/
 ├── .streamlit/config.toml         # Streamlit theme/runtime configuration
 ├── database.py                    # SQLite schema, migrations, and queries
 ├── config.py                      # Paths, limits, thresholds, feature definitions
-├── runtime.txt                    # Streamlit Cloud Python runtime
-└── requirements.txt               # Reproducible dependencies
+├── runtime.txt                    # Preferred Streamlit Python runtime
+└── requirements.txt               # Streamlit research dependencies
 ```
 
 ## Run locally
@@ -312,18 +315,38 @@ python -m ml.evaluate_model
 
 These commands are needed only to reproduce training. Normal application use loads the committed validated model artifact.
 
-## Streamlit deployment
+## Vercel production deployment
 
-The repository is configured for Streamlit Community Cloud:
+The production application uses an architecture designed for Vercel's execution model:
 
-1. repository: `DSGAMING98/MemoryMap`;
-2. branch: `master`;
-3. entry point: `app.py`;
-4. Python runtime: Python 3.12, selected in Streamlit Cloud advanced settings (`runtime.txt` documents the preferred local/cloud runtime);
-5. packages: `requirements.txt`;
-6. trained artifact: `models/retention_model.pkl`.
+```text
+Browser
+  ├── public/index.html       Vercel static frontend
+  ├── public/styles.css       Responsive visual system
+  └── public/app.js           Local study workflow and analytics
+                 │
+                 ▼
+          POST /api/predict
+                 │
+                 ▼
+       Vercel Python Function
+       FastAPI + trained Random Forest
+```
 
-Pushing to `master` triggers the existing Streamlit deployment to rebuild. No Flask, Django, React, or separate backend is required; the product remains Streamlit-only.
+- `public/` contains the responsive single-page application.
+- `api/predict.py` exposes model status and prediction endpoints.
+- `api/requirements.txt` keeps the function bundle independent from Streamlit.
+- `vercel.json` includes the 8.49 MiB trained model and configures security headers.
+- Learner sessions, schedules, and quizzes use browser `localStorage`; they remain private to the current browser and survive refreshes.
+- The API receives only numeric prediction features: elapsed days, prior exposures, and prior accuracy.
+
+The Vercel client implements the complete user journey: profile, study-session logging, prospective model prediction, fixed-curve comparison, threshold scheduling, recall checks, matched-error analytics, and the report-ready methodology/results view.
+
+The original Streamlit implementation remains available in `app.py` and `pages/` for local research use:
+
+```bash
+python -m streamlit run app.py
+```
 
 ## Results and conclusion
 
@@ -358,7 +381,8 @@ The model-comparison dashboard reports a winner only when at least two methods h
 - [x] Quiz engine
 - [x] Analytics dashboard
 - [x] Model comparison
-- [x] Streamlit deployment
+- [x] Vercel-native frontend and Python prediction API
+- [x] Production deployment
 
 ## Responsible use
 
@@ -385,4 +409,4 @@ If you use the public Duolingo data, cite:
 
 **Domain:** Educational technology, machine learning, personalized learning
 
-**Interface:** Streamlit only
+**Interfaces:** Vercel production client and preserved Streamlit research client

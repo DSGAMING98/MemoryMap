@@ -1,0 +1,17 @@
+data/
+.streamlit/
+assets/
+core/
+ml/
+pages/
+services/
+__pycache__/
+*.pyc
+memorymap.db*
+app.py
+config.py
+database.py
+utils.py
+runtime.txt
+requirements.txt
+models/*.json

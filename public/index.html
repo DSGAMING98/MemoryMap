@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="MemoryMap predicts retention and builds adaptive revision schedules from real learning history.">
+  <title>MemoryMap · Adaptive Memory Intelligence</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="MemoryMap home">
+      <span class="brand-mark">M</span>
+      <span><strong>MemoryMap</strong><small>Adaptive recall lab</small></span>
+    </a>
+
+    <nav aria-label="Application sections">
+      <button class="nav-item active" data-view="overview"><span>⌂</span>Overview</button>
+      <button class="nav-item" data-view="study"><span>✎</span>Study session</button>
+      <button class="nav-item" data-view="predict"><span>⌁</span>Retention lab</button>
+      <button class="nav-item" data-view="schedule"><span>◷</span>Revision plan</button>
+      <button class="nav-item" data-view="quiz"><span>✓</span>Recall check</button>
+      <button class="nav-item" data-view="analytics"><span>⌗</span>Analytics</button>
+      <button class="nav-item" data-view="research"><span>⚖</span>Research report</button>
+    </nav>
+
+    <div class="sidebar-status">
+      <div class="status-line"><span class="pulse"></span><span id="apiLabel">Checking model API</span></div>
+      <p>Vercel release <strong>1.1.1</strong></p>
+      <p>Target retention <strong>70%</strong></p>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <button id="menuButton" class="icon-button" aria-label="Open navigation">☰</button>
+      <div>
+        <p class="eyebrow">PERSONALIZED LEARNING INTELLIGENCE</p>
+        <h1 id="viewTitle">Overview</h1>
+      </div>
+      <div class="profile-chip"><span id="profileInitial">L</span><div><strong id="profileName">Local learner</strong><small>Private browser workspace</small></div></div>
+    </header>
+
+    <section class="view active" id="overview">
+      <div class="hero card">
+        <div>
+          <span class="badge">RESEARCH-GRADE REVISION</span>
+          <h2>Study when memory needs you—not when a calendar guesses.</h2>
+          <p>MemoryMap combines a forgetting-curve baseline, a trained Random Forest, and genuine delayed-recall evidence to produce transparent revision recommendations.</p>
+          <div class="actions"><button class="primary" data-jump="study">Record a study session</button><button class="secondary" data-jump="research">Read the methodology</button></div>
+        </div>
+        <div class="hero-orbit" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="brain">M</div></div>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric card"><span>Active topics</span><strong id="metricTopics">0</strong><small>tracked in this browser</small></article>
+        <article class="metric card"><span>Study sessions</span><strong id="metricSessions">0</strong><small>prospective records</small></article>
+        <article class="metric card"><span>Average recall</span><strong id="metricRecall">—</strong><small>from completed checks</small></article>
+        <article class="metric card"><span>Due revisions</span><strong id="metricDue">0</strong><small>at or below threshold</small></article>
+      </div>
+
+      <div class="two-column">
+        <article class="card panel"><div class="panel-head"><div><p class="eyebrow">NEXT ACTIONS</p><h3>Revision queue</h3></div><button class="text-button" data-jump="schedule">Open plan →</button></div><div id="overviewQueue" class="empty-state">Your queue will appear after a study session.</div></article>
+        <article class="card panel"><div class="panel-head"><div><p class="eyebrow">SYSTEM STATE</p><h3>Research safeguards</h3></div></div><ul class="check-list"><li><span>✓</span>Predictions saved before recall outcomes</li><li><span>✓</span>Outcome leakage fields blocked</li><li><span>✓</span>Fallbacks identified instead of fabricated</li><li><span>✓</span>Model metadata and test metrics reproducible</li></ul></article>
+      </div>
+    </section>
+
+    <section class="view" id="study">
+      <div class="section-intro"><div><p class="eyebrow">PROSPECTIVE DATA COLLECTION</p><h2>Record a study session</h2><p>Capture the conditions before the learner takes a delayed recall test.</p></div></div>
+      <form id="studyForm" class="card form-card">
+        <div class="form-grid">
+          <label>Learner name<input id="learnerName" name="learnerName" autocomplete="name" placeholder="Your name" required></label>
+          <label>Topic<input id="topicName" name="topicName" placeholder="e.g. Binary search trees" required></label>
+          <label>Subject<input id="subjectName" name="subjectName" placeholder="e.g. Data structures"></label>
+          <label>Study duration (minutes)<input id="studyDuration" name="studyDuration" type="number" min="1" max="600" value="30" required></label>
+          <label>Difficulty<select id="difficulty" name="difficulty"><option value="1">1 · Very easy</option><option value="2">2 · Easy</option><option value="3" selected>3 · Moderate</option><option value="4">4 · Hard</option><option value="5">5 · Very hard</option></select></label>
+          <label>Confidence<select id="confidence" name="confidence"><option value="1">1 · Very low</option><option value="2">2 · Low</option><option value="3" selected>3 · Moderate</option><option value="4">4 · High</option><option value="5">5 · Very high</option></select></label>
+          <label>Previous exposures<input id="historySeen" name="historySeen" type="number" min="0" max="100000" value="0" required></label>
+          <label>Previous accuracy (%)<input id="historyAccuracy" name="historyAccuracy" type="number" min="0" max="100" value="70" required></label>
+        </div>
+        <label>Study notes<textarea id="studyNotes" name="studyNotes" rows="3" placeholder="What did you cover? What still feels uncertain?"></textarea></label>
+        <div class="form-footer"><p>The session is stored locally in this browser. No identity data is sent to the prediction API.</p><button class="primary" type="submit">Save session and predict</button></div>
+      </form>
+      <article class="card panel"><div class="panel-head"><div><p class="eyebrow">SESSION HISTORY</p><h3>Recent study activity</h3></div></div><div id="sessionTable"></div></article>
+    </section>
+
+    <section class="view" id="predict">
+      <div class="section-intro"><div><p class="eyebrow">RETENTION LAB</p><h2>Compare memory forecasts</h2><p>Use the public bootstrap model and the mathematical half-life baseline side by side.</p></div></div>
+      <div class="two-column prediction-layout">
+        <form id="predictionForm" class="card form-card compact">
+          <label>Study session<select id="predictionSession"></select></label>
+          <label>Prediction horizon<div class="range-row"><input id="deltaDays" type="range" min="0" max="30" step="0.25" value="1"><output id="deltaOutput">1 day</output></div></label>
+          <label>Baseline half-life (days)<input id="halfLife" type="number" min="0.1" max="365" step="0.1" value="1"></label>
+          <label>Revision threshold<div class="range-row"><input id="threshold" type="range" min="0.5" max="0.9" step="0.01" value="0.7"><output id="thresholdOutput">70%</output></div></label>
+          <button class="primary" type="submit">Generate prediction</button>
+          <p class="form-note">The ML model uses only delay, previous exposures, and previous historical accuracy.</p>
+        </form>
+        <article class="card prediction-result" id="predictionResult"><div class="empty-state">Select a saved study session to begin.</div></article>
+      </div>
+      <article class="card panel"><div class="panel-head"><div><p class="eyebrow">FORGETTING CURVE</p><h3>Thirty-day forecast</h3></div></div><div id="curveChart" class="chart"></div></article>
+    </section>
+
+    <section class="view" id="schedule">
+      <div class="section-intro"><div><p class="eyebrow">ADAPTIVE SCHEDULER</p><h2>Your revision plan</h2><p>Recommendations target 70% predicted retention and clearly label their evidence source.</p></div><button class="secondary" id="refreshSchedule">Refresh priorities</button></div>
+      <div id="scheduleList" class="schedule-list"></div>
+    </section>
+
+    <section class="view" id="quiz">
+      <div class="section-intro"><div><p class="eyebrow">DELAYED RECALL</p><h2>Record a recall check</h2><p>Measure actual performance only after a prospective prediction exists.</p></div></div>
+      <form id="quizForm" class="card form-card">
+        <div class="form-grid">
+          <label>Study session<select id="quizSession"></select></label>
+          <label>Total questions<input id="totalQuestions" type="number" min="1" max="200" value="10" required></label>
+          <label>Correct answers<input id="correctAnswers" type="number" min="0" max="200" value="7" required></label>
+          <label>Confidence after quiz<select id="quizConfidence"><option value="1">1 · Very low</option><option value="2">2 · Low</option><option value="3" selected>3 · Moderate</option><option value="4">4 · High</option><option value="5">5 · Very high</option></select></label>
+        </div>
+        <div class="form-footer"><p>Quiz delay is calculated from the original study timestamp.</p><button class="primary" type="submit">Save recall result</button></div>
+      </form>
+      <article class="card panel"><div class="panel-head"><div><p class="eyebrow">RECALL HISTORY</p><h3>Prediction versus outcome</h3></div></div><div id="quizHistory"></div></article>
+    </section>
+
+    <section class="view" id="analytics">
+      <div class="section-intro"><div><p class="eyebrow">LEARNING ANALYTICS</p><h2>Evidence, not impressions</h2><p>Summaries use only records created in this browser.</p></div></div>
+      <div class="metric-grid"><article class="metric card"><span>Total study time</span><strong id="analyticsMinutes">0m</strong><small>across all sessions</small></article><article class="metric card"><span>Recall checks</span><strong id="analyticsQuizzes">0</strong><small>measured outcomes</small></article><article class="metric card"><span>Mean absolute error</span><strong id="analyticsMae">—</strong><small>matched predictions</small></article><article class="metric card"><span>Average confidence</span><strong id="analyticsConfidence">—</strong><small>after studying</small></article></div>
+      <div class="two-column"><article class="card panel"><div class="panel-head"><div><p class="eyebrow">TOPIC PERFORMANCE</p><h3>Recall by topic</h3></div></div><div id="topicBars" class="bars"></div></article><article class="card panel"><div class="panel-head"><div><p class="eyebrow">MODEL ERROR</p><h3>Matched outcomes</h3></div></div><div id="errorBars" class="bars"></div></article></div>
+    </section>
+
+    <section class="view" id="research">
+      <div class="section-intro"><div><p class="eyebrow">PROJECT REPORT</p><h2>Methodology and measured results</h2><p>A concise, defensible account of the dataset, model, evaluation, and limitations.</p></div><a class="secondary button-link" href="https://github.com/DSGAMING98/MemoryMap" target="_blank" rel="noreferrer">Open GitHub</a></div>
+      <div class="report-grid">
+        <article class="card report-card"><span class="number">01</span><h3>Research problem</h3><p>Can learning-history data predict memory retention and recommend better revision intervals than a fixed forgetting curve?</p></article>
+        <article class="card report-card"><span class="number">02</span><h3>Dataset</h3><p>12,854,226 anonymized Duolingo traces from Settles and Meeder (ACL 2016), processed in 250,000-row chunks.</p></article>
+        <article class="card report-card"><span class="number">03</span><h3>Training design</h3><p>A deterministic one-million-row uniform sample; 810k training, 90k validation, and 100k untouched chronological test rows.</p></article>
+        <article class="card report-card"><span class="number">04</span><h3>Selected model</h3><p>Random Forest with 40 trees, depth 12, minimum leaf size 8. Inputs: delay, prior exposures, and prior accuracy.</p></article>
+      </div>
+      <article class="card panel results-table"><div class="panel-head"><div><p class="eyebrow">FINAL TEST SET</p><h3>Saved artifact results</h3></div><span class="badge success">11/11 checks passed</span></div><div class="result-row"><span>Observations</span><strong>100,000</strong></div><div class="result-row"><span>MAE</span><strong>17.026 pp</strong></div><div class="result-row"><span>RMSE</span><strong>26.918 pp</strong></div><div class="result-row"><span>R²</span><strong>0.0241</strong></div><div class="result-row"><span>Expected calibration error</span><strong>0.238 pp</strong></div><div class="result-row"><span>Artifact size</span><strong>8.49 MiB</strong></div></article>
+      <article class="card panel"><div class="panel-head"><div><p class="eyebrow">HONEST CONCLUSION</p><h3>What the evidence supports</h3></div></div><p>The implementation proves that prospective prediction, threshold scheduling, and delayed-recall validation can be integrated without using current outcomes as inputs. The low R² means the three public-history features explain little event-level variation, so MemoryMap does not claim that full personalization has already been proven. It provides the infrastructure to test that claim once enough genuine longitudinal outcomes exist.</p></article>
+    </section>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
