@@ -8,7 +8,7 @@
 
 **MemoryMap** is an educational research application that predicts recall, recommends revision times, records delayed-recall quiz results, and compares predictions with real outcomes. The repository preserves the original Streamlit research interface and now includes a Vercel-native production client with a Python prediction API.
 
-🌐 **Live application:** the production Vercel URL is listed in the deployment section below.
+🌐 **Live application:** [https://memorymap-zeta.vercel.app](https://memorymap-zeta.vercel.app)
 
 > **Research question:** Can learning-history data predict memory retention and recommend a better revision interval than a fixed forgetting-curve schedule?
 
@@ -317,6 +317,8 @@ These commands are needed only to reproduce training. Normal application use loa
 
 ## Vercel production deployment
 
+**Production URL:** [memorymap-zeta.vercel.app](https://memorymap-zeta.vercel.app)
+
 The production application uses an architecture designed for Vercel's execution model:
 
 ```text
@@ -335,8 +337,9 @@ Browser
 
 - `public/` contains the responsive single-page application.
 - `api/predict.py` exposes model status and prediction endpoints.
-- `api/requirements.txt` keeps the function bundle independent from Streamlit.
+- `pyproject.toml` and `uv.lock` provide a reproducible Python 3.12 API environment independent from Streamlit.
 - `vercel.json` includes the 8.49 MiB trained model and configures security headers.
+- Pushes to the GitHub `master` branch automatically create a new Vercel production deployment.
 - Learner sessions, schedules, and quizzes use browser `localStorage`; they remain private to the current browser and survive refreshes.
 - The API receives only numeric prediction features: elapsed days, prior exposures, and prior accuracy.
 
