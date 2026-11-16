@@ -1,10 +1,15 @@
+<p align="center">
+  <img src="public/memorymap-logo.png" alt="MemoryMap logo: memories branching from an open book" width="620">
+</p>
+
 # 🧠 MemoryMap
 
-### Personalized memory-retention prediction and adaptive revision in Streamlit
+### Personalized memory-retention prediction and adaptive revision on Vercel
 
 [![Deployment](https://img.shields.io/badge/Vercel-Production-000000?logo=vercel&logoColor=white)](#vercel-production-deployment)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Model](https://img.shields.io/badge/Model-Random%20Forest-7C5CFF)](#model-training)
+[![Model](https://img.shields.io/badge/Model-Random%20Forest-F3A72F)](#model-training)
+[![API](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](#prediction-api)
 
 **MemoryMap** is an educational research application that predicts recall, recommends revision times, records delayed-recall quiz results, and compares predictions with real outcomes. The repository preserves the original Streamlit research interface and now includes a Vercel-native production client with a Python prediction API.
 
@@ -14,7 +19,9 @@
 
 ## What is implemented
 
-- A polished, multipage Streamlit interface
+- A responsive Vercel-native single-page application using the supplied MemoryMap brand system
+- A FastAPI prediction function backed by the validated Random Forest artifact
+- A preserved, multipage Streamlit research interface for local use
 - Student profiles, topics, study sessions, notes, and confidence tracking
 - A mathematical forgetting-curve baseline
 - A trained public-data bootstrap model
@@ -26,7 +33,7 @@
 - Side-by-side model comparison with MAE, RMSE, bias, R², and accuracy bands
 - A normalized SQLite data layer with validation, migrations, and indexes
 - A reproducible preprocessing, training, and evaluation pipeline
-- Streamlit Community Cloud deployment
+- Automated GitHub-to-Vercel production deployment
 
 ## Application workflow
 
@@ -233,7 +240,7 @@ Final test results for the saved model:
 
 The evaluation script reloads the artifact, reconstructs the saved split, verifies feature order/ranges, and reproduces the recorded metrics. All 11 artifact sanity checks pass.
 
-The deployment model deliberately uses a bounded forest. Reducing the forest from 100 depth-16 trees to 40 depth-12 trees reduced the serialized artifact from approximately 100.3 MiB to 8.5 MiB while slightly improving final-test RMSE and R². This lowers both startup memory and download time on Streamlit Community Cloud without changing the dataset, split, features, candidate-selection rule, or evaluation protocol.
+The deployment model deliberately uses a bounded forest. Reducing the forest from 100 depth-16 trees to 40 depth-12 trees reduced the serialized artifact from approximately 100.3 MiB to 8.5 MiB while slightly improving final-test RMSE and R². This lowers serverless cold-start transfer and memory pressure on Vercel without changing the dataset, split, features, candidate-selection rule, or evaluation protocol.
 
 ### Interpretation and limitations
 
@@ -268,8 +275,11 @@ Foreign keys, range checks, migrations, transaction handling, and indexes protec
 ```text
 MemoryMap/
 ├── public/                        # Vercel frontend: HTML, CSS, and JavaScript
+│   └── memorymap-logo.png         # Official brand artwork used by the UI and README
 ├── api/                           # Vercel FastAPI prediction function
 ├── vercel.json                   # Function bundle and HTTP configuration
+├── pyproject.toml                 # Python 3.12 API dependencies and Vercel entry point
+├── uv.lock                        # Reproducible Vercel dependency lock
 ├── app.py                         # Streamlit entry point
 ├── pages/                         # Seven Streamlit pages
 ├── core/                          # Curves, prediction, scheduling, quiz, metrics
@@ -302,6 +312,8 @@ python -m streamlit run app.py
 ```
 
 Open `http://localhost:8501`.
+
+To preview only the Vercel frontend locally, serve the `public/` directory with any static HTTP server. The live production build remains the recommended way to exercise the Python API.
 
 ### Rebuild the dataset and model
 
@@ -336,6 +348,7 @@ Browser
 ```
 
 - `public/` contains the responsive single-page application.
+- `public/memorymap-logo.png` is the official logo and the source of the production amber/cyan design palette.
 - `api/predict.py` exposes model status and prediction endpoints.
 - `pyproject.toml` and `uv.lock` provide a reproducible Python 3.12 API environment independent from Streamlit.
 - `vercel.json` includes the 8.49 MiB trained model and configures security headers.
@@ -350,6 +363,20 @@ The original Streamlit implementation remains available in `app.py` and `pages/`
 ```bash
 python -m streamlit run app.py
 ```
+
+### Prediction API
+
+`GET /api/predict` reports model readiness, version, class, and feature order. `POST /api/predict` accepts:
+
+| Field | Type | Allowed range | Purpose |
+|---|---:|---:|---|
+| `delta_days` | number | 0–3,650 | Prediction horizon in days |
+| `history_seen` | integer | 0–100,000 | Number of prior exposures |
+| `history_accuracy` | number | 0–1 | Accuracy before the current event |
+| `half_life_days` | number | greater than 0, up to 3,650 | Fixed-curve comparison half-life |
+| `threshold` | number | strictly between 0 and 1 | Target retention for scheduling |
+
+The response contains the Random Forest estimate, fixed-curve estimate, threshold, recommended revision interval, model class, and the model's public-bootstrap role. Personal profile text and study notes never leave the browser.
 
 ## Results and conclusion
 
