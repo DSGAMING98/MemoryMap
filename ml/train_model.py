@@ -561,9 +561,9 @@ def create_candidate_model(
     ):
         return (
             RandomForestRegressor(
-                n_estimators=100,
-                max_depth=16,
-                min_samples_leaf=3,
+                n_estimators=40,
+                max_depth=12,
+                min_samples_leaf=8,
                 random_state=RANDOM_STATE,
                 n_jobs=-1
             )
@@ -618,6 +618,48 @@ def get_model_display_name(
         model_name,
         model_name
     )
+
+
+def get_model_hyperparameters(
+    model_name
+):
+    model = create_candidate_model(
+        model_name
+    )
+
+    parameters = model.get_params(
+        deep=False
+    )
+
+    selected_parameters = {
+        "linear_regression": [
+            "fit_intercept",
+        ],
+        "random_forest": [
+            "n_estimators",
+            "max_depth",
+            "min_samples_leaf",
+            "random_state",
+            "n_jobs",
+        ],
+        "gradient_boosting": [
+            "learning_rate",
+            "max_iter",
+            "max_leaf_nodes",
+            "l2_regularization",
+            "random_state",
+        ],
+    }
+
+    return {
+        parameter:
+            parameters.get(
+                parameter
+            )
+        for parameter in selected_parameters[
+            model_name
+        ]
+    }
 
 
 # prediction normalization
@@ -1713,6 +1755,11 @@ def train_retention_model(
 
         "candidate_key":
             winner_name,
+
+        "model_hyperparameters":
+            get_model_hyperparameters(
+                winner_name
+            ),
 
         "feature_set":
             feature_set,

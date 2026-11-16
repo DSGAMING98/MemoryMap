@@ -203,7 +203,7 @@ Three candidates are trained:
 | Candidate | Main configuration |
 |---|---|
 | Linear Regression | Standardized inputs |
-| Random Forest | 100 trees, max depth 16, minimum leaf size 3, all CPU cores |
+| Random Forest | 40 trees, max depth 12, minimum leaf size 8, all CPU cores |
 | Histogram Gradient Boosting | learning rate 0.08, 200 iterations, 31 leaves, L2 = 0.1 |
 
 Candidates are ranked by validation MAE. The winner is refit on all 900,000 development rows and evaluated once on the 100,000-row test set.
@@ -212,7 +212,7 @@ Candidates are ranked by validation MAE. The winner is refit on all 900,000 deve
 
 | Model | Validation MAE | Validation RMSE | Validation R² |
 |---|---:|---:|---:|
-| **Random Forest** | **16.957 pp** | 26.884 pp | 0.0205 |
+| **Random Forest** | **16.949 pp** | 26.802 pp | 0.0264 |
 | Histogram Gradient Boosting | 16.976 pp | **26.784 pp** | **0.0278** |
 | Linear Regression | 17.125 pp | 26.961 pp | 0.0148 |
 
@@ -223,15 +223,17 @@ Final test results for the saved model:
 | Metric | Value |
 |---|---:|
 | Test observations | 100,000 |
-| MAE | 17.027 percentage points |
-| RMSE | 26.986 percentage points |
-| R² | 0.0192 |
-| Mean bias | +0.108 percentage points |
-| Within 10 percentage points | 50.777% |
-| Within 15 percentage points | 79.394% |
-| Expected calibration error | 0.602 percentage points |
+| MAE | 17.026 percentage points |
+| RMSE | 26.918 percentage points |
+| R² | 0.0241 |
+| Mean bias | +0.107 percentage points |
+| Within 10 percentage points | 49.720% |
+| Within 15 percentage points | 80.047% |
+| Expected calibration error | 0.238 percentage points |
 
 The evaluation script reloads the artifact, reconstructs the saved split, verifies feature order/ranges, and reproduces the recorded metrics. All 11 artifact sanity checks pass.
+
+The deployment model deliberately uses a bounded forest. Reducing the forest from 100 depth-16 trees to 40 depth-12 trees reduced the serialized artifact from approximately 100.3 MiB to 8.5 MiB while slightly improving final-test RMSE and R². This lowers both startup memory and download time on Streamlit Community Cloud without changing the dataset, split, features, candidate-selection rule, or evaluation protocol.
 
 ### Interpretation and limitations
 
@@ -317,11 +319,28 @@ The repository is configured for Streamlit Community Cloud:
 1. repository: `DSGAMING98/MemoryMap`;
 2. branch: `master`;
 3. entry point: `app.py`;
-4. Python runtime: `runtime.txt`;
+4. Python runtime: Python 3.12, selected in Streamlit Cloud advanced settings (`runtime.txt` documents the preferred local/cloud runtime);
 5. packages: `requirements.txt`;
 6. trained artifact: `models/retention_model.pkl`.
 
 Pushing to `master` triggers the existing Streamlit deployment to rebuild. No Flask, Django, React, or separate backend is required; the product remains Streamlit-only.
+
+## Results and conclusion
+
+The implementation answers the engineering part of the research question: learning-history variables can be converted into prospective recall estimates, those estimates can drive threshold-based schedules, and later delayed-recall outcomes can be matched back to the original predictions without outcome leakage.
+
+On the public Duolingo test split, Random Forest produced the lowest validation MAE and achieved a final MAE of 17.026 percentage points. Its low test R² of 0.0241 shows that the three public-history features do not explain most individual event variation. Therefore, the honest conclusion is not that personalization has already been proven superior. The application now provides the experimental infrastructure needed to test that claim as genuine MemoryMap longitudinal data accumulates.
+
+The model-comparison dashboard reports a winner only when at least two methods have predictions for the same strict recall observations. Until that condition is met, the interface reports insufficient evidence instead of manufacturing personalized values.
+
+### Future research scope
+
+- collect repeated 1-, 3-, and 7-day recall observations from consenting learners;
+- train a separate MemoryMap model using study duration, difficulty, confidence, revision count, previous genuine quiz score, and elapsed time;
+- use learner- or topic-grouped validation to prevent identity overlap;
+- compare fixed, public bootstrap, and personalized methods on a common prospective test set;
+- replace ephemeral demo SQLite storage with a hosted database for durable multi-user research;
+- study uncertainty estimates and threshold sensitivity before making stronger scheduling claims.
 
 ## Project status
 
