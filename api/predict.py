@@ -24,7 +24,13 @@ class PredictionRequest(BaseModel):
 def load_model():
     if not MODEL_PATH.exists():
         raise FileNotFoundError("The trained retention model is unavailable.")
-    return joblib.load(MODEL_PATH)
+    model = joblib.load(MODEL_PATH)
+    # The artifact was trained with all local CPU cores. Vercel Functions do
+    # not expose joblib's multiprocessing primitives, so inference must stay
+    # in-process for reliable low-latency requests.
+    if hasattr(model, "n_jobs"):
+        model.n_jobs = 1
+    return model
 
 
 app = FastAPI(
