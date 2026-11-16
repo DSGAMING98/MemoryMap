@@ -374,7 +374,7 @@ revision research.
 
         if st.button(
                 "↪ Switch Profile",
-                use_container_width=True
+                width="stretch"
         ):
             st.session_state.student_id = None
             st.session_state.student_name = None
@@ -712,13 +712,13 @@ with nav1:
     st.page_link(
         "pages/1_Dashboard.py",
         label="📊 Open Dashboard",
-        use_container_width=True
+        width="stretch"
     )
 
     st.page_link(
         "pages/2_Study_Session.py",
         label="📚 Record Study Session",
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -726,13 +726,13 @@ with nav2:
     st.page_link(
         "pages/3_Retention_Predictor.py",
         label="📉 Retention Predictor",
-        use_container_width=True
+        width="stretch"
     )
 
     st.page_link(
         "pages/4_Revision_Scheduler.py",
         label="⏰ Revision Scheduler",
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -740,20 +740,20 @@ with nav3:
     st.page_link(
         "pages/5_Quiz_and_Recall.py",
         label="🧪 Quiz & Recall",
-        use_container_width=True
+        width="stretch"
     )
 
     st.page_link(
         "pages/6_Analytics.py",
         label="📊 Analytics",
-        use_container_width=True
+        width="stretch"
     )
 
 
 st.page_link(
     "pages/7_Model_Comparison.py",
     label="⚖️ Compare Prediction Models",
-    use_container_width=True
+    width="stretch"
 )
 
 

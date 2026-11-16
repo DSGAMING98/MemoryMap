@@ -732,7 +732,7 @@ def show_saved_predictions(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1161,7 +1161,7 @@ def show_quiz_form(
         submitted = (
             st.form_submit_button(
                 "Save Recall Result",
-                use_container_width=True
+                width="stretch"
             )
         )
 
@@ -1485,7 +1485,7 @@ def show_prediction_comparison(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     display_dataframe = (
@@ -1528,7 +1528,7 @@ def show_prediction_comparison(
 
     st.dataframe(
         display_dataframe,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1874,7 +1874,7 @@ def show_recall_history(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1917,7 +1917,7 @@ def show_recall_history(
 
         st.plotly_chart(
             figure,
-            use_container_width=True
+            width="stretch"
         )
 
         st.caption(

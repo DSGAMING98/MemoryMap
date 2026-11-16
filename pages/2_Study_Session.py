@@ -327,7 +327,7 @@ def create_new_topic(
         submitted = (
             st.form_submit_button(
                 "Create Topic",
-                use_container_width=True
+                width="stretch"
             )
         )
 
@@ -751,7 +751,7 @@ def log_study_session(
         submitted = (
             st.form_submit_button(
                 "Save Study Session",
-                use_container_width=True
+                width="stretch"
             )
         )
 
@@ -1001,7 +1001,7 @@ def show_study_history(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 

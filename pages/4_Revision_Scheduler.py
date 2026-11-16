@@ -1295,7 +1295,7 @@ def show_retention_forecast(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -1432,7 +1432,7 @@ def show_strategy_comparison(
             pd.DataFrame(
                 rows
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True
         )
 
@@ -1735,7 +1735,7 @@ def show_due_revisions(
                         f"complete_revision_"
                         f"{revision_id}"
                     ),
-                    use_container_width=True
+                    width="stretch"
                 ):
                     mark_revision_done(
                         revision
@@ -1830,7 +1830,7 @@ def show_upcoming_revisions(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -2105,7 +2105,7 @@ def show_page():
 
     if st.button(
         "Save Revision Schedule",
-        use_container_width=True
+        width="stretch"
     ):
         save_generated_schedule(
             schedule

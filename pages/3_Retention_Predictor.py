@@ -1181,7 +1181,7 @@ def show_forgetting_curve(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -1636,7 +1636,7 @@ def show_prediction_comparison(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     difference = abs(
@@ -1954,7 +1954,7 @@ def show_prediction_history(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -2143,7 +2143,7 @@ def show_page():
 
     save_clicked = st.button(
         "Save Prospective Prediction",
-        use_container_width=True,
+        width="stretch",
         disabled=(
             not prospective
         )

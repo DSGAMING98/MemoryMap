@@ -717,7 +717,7 @@ def show_study_session_timeline(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -845,7 +845,7 @@ def show_recall_timeline(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -975,7 +975,7 @@ def show_delay_vs_recall(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -1072,7 +1072,7 @@ def relationship_graph(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -1238,7 +1238,7 @@ def show_correlations(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1319,7 +1319,7 @@ def show_topic_analytics(
 
     st.dataframe(
         display,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1375,7 +1375,7 @@ def show_topic_analytics(
 
             st.plotly_chart(
                 figure,
-                use_container_width=True
+                width="stretch"
             )
 
 
@@ -1433,7 +1433,7 @@ def show_checkpoint_analytics(
 
     st.dataframe(
         display,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1489,7 +1489,7 @@ def show_checkpoint_analytics(
 
             st.plotly_chart(
                 figure,
-                use_container_width=True
+                width="stretch"
             )
 
 
@@ -1551,7 +1551,7 @@ def show_model_availability(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1718,7 +1718,7 @@ def show_individual_model_metrics(
 
     st.dataframe(
         dataframe,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1797,7 +1797,7 @@ def show_common_subset_comparison(
 
     st.dataframe(
         dataframe,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1911,7 +1911,7 @@ def show_common_subset_comparison(
 
         st.plotly_chart(
             figure,
-            use_container_width=True
+            width="stretch"
         )
 
 
@@ -2090,7 +2090,7 @@ def show_predicted_vs_actual(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -2199,7 +2199,7 @@ def show_baseline_comparisons(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -2399,7 +2399,7 @@ def show_raw_data(
             else:
                 st.dataframe(
                     sessions,
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -2414,7 +2414,7 @@ def show_raw_data(
                     probability_display(
                         quizzes
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -2429,7 +2429,7 @@ def show_raw_data(
                     probability_display(
                         learning
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -2444,7 +2444,7 @@ def show_raw_data(
                     probability_display(
                         evaluation
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -2459,7 +2459,7 @@ def show_raw_data(
                     probability_display(
                         common_dataframe
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 

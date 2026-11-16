@@ -567,7 +567,7 @@ def show_model_availability(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -814,7 +814,7 @@ def show_fair_leaderboard(
 
     st.dataframe(
         dataframe,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1025,7 +1025,7 @@ def show_error_comparison(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -1132,7 +1132,7 @@ def show_accuracy_bands(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -1225,7 +1225,7 @@ def show_bias_analysis(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -1428,7 +1428,7 @@ def show_predicted_vs_actual(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -1492,7 +1492,7 @@ def show_test_by_test_comparison(
 
     st.dataframe(
         display,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1621,7 +1621,7 @@ def show_baseline_comparison(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1845,7 +1845,7 @@ def show_raw_comparison_data(
                     probability_display(
                         evaluation
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -1860,7 +1860,7 @@ def show_raw_comparison_data(
                     probability_display(
                         common_dataframe
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -1875,7 +1875,7 @@ def show_raw_comparison_data(
                     create_metrics_dataframe(
                         individual_metrics
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 
@@ -1890,7 +1890,7 @@ def show_raw_comparison_data(
                     create_metrics_dataframe(
                         common_metrics
                     ),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True
                 )
 

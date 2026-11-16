@@ -233,7 +233,7 @@ def create_student_profile():
 
         submitted = st.form_submit_button(
             "Create Profile",
-            use_container_width=True
+            width="stretch"
         )
 
     if not submitted:
@@ -1118,7 +1118,7 @@ def show_revision_overview(
                     due_revisions
                 )
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True
         )
 
@@ -1137,7 +1137,7 @@ def show_revision_overview(
                         upcoming_revisions
                     )
                 ),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True
             )
 
@@ -1280,7 +1280,7 @@ def show_recent_sessions(
         pd.DataFrame(
             rows
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
@@ -1442,7 +1442,7 @@ def show_recall_performance(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
     st.caption(
@@ -1535,7 +1535,7 @@ def show_topic_performance(
 
     st.plotly_chart(
         figure,
-        use_container_width=True
+        width="stretch"
     )
 
 
@@ -1671,28 +1671,28 @@ def show_quick_actions():
         st.page_link(
             "pages/2_Study_Session.py",
             label="📚 Study Session",
-            use_container_width=True
+            width="stretch"
         )
 
     with col2:
         st.page_link(
             "pages/3_Retention_Predictor.py",
             label="📉 Predict Retention",
-            use_container_width=True
+            width="stretch"
         )
 
     with col3:
         st.page_link(
             "pages/4_Revision_Scheduler.py",
             label="⏰ Revision Scheduler",
-            use_container_width=True
+            width="stretch"
         )
 
     with col4:
         st.page_link(
             "pages/5_Quiz_and_Recall.py",
             label="🧪 Quiz & Recall",
-            use_container_width=True
+            width="stretch"
         )
 
 
